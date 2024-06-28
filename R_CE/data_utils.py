@@ -13,7 +13,13 @@ def load_all(dataset, data_path):
 	test_negative = data_path + '{}.test.negative'.format(dataset)
 
 	################# load training data #################	
-	train_data = pd.read_csv(
+	if dataset == 'movielens':
+		train_data = pd.read_csv(
+			train_rating, 
+			sep=',', header=None, names=['user', 'item', 'noisy'], 
+			usecols=[0, 1, 2], dtype={0: np.int32, 1: np.int32, 2: np.float32})
+	else:
+		train_data = pd.read_csv(
 		train_rating, 
 		sep='\t', header=None, names=['user', 'item', 'noisy'], 
 		usecols=[0, 1, 2], dtype={0: np.int32, 1: np.int32, 2: np.int32})
@@ -21,6 +27,9 @@ def load_all(dataset, data_path):
 	if dataset == "adressa":
 		user_num = 212231
 		item_num = 6596
+	elif dataset == "movielens":
+		user_num = 162542
+		item_num = 209172
 	else:
 		user_num = train_data['user'].max() + 1
 		item_num = train_data['item'].max() + 1
@@ -33,19 +42,26 @@ def load_all(dataset, data_path):
 	train_data_list = []
 	train_data_noisy = []
 	for x in train_data:
-		train_mat[x[0], x[1]] = 1.0
-		train_data_list.append([x[0], x[1]])
+		train_mat[int(x[0]), int(x[1])] = 1.0
+		train_data_list.append([int(x[0]), int(x[1])])
 		train_data_noisy.append(x[2])
 
 	################# load validation data #################
-	valid_data = pd.read_csv(
+	if dataset == 'movielens':
+		valid_data = pd.read_csv(
+			valid_rating, 
+			sep=',', header=None, names=['user', 'item', 'noisy'], 
+			usecols=[0, 1, 2], dtype={0: np.int32, 1: np.int32, 2: np.float32})
+	else:
+		valid_data = pd.read_csv(
 		valid_rating, 
 		sep='\t', header=None, names=['user', 'item', 'noisy'], 
 		usecols=[0, 1, 2], dtype={0: np.int32, 1: np.int32, 2: np.int32})
+		
 	valid_data = valid_data.values.tolist()
 	valid_data_list = []
 	for x in valid_data:
-		valid_data_list.append([x[0], x[1]])
+		valid_data_list.append([int(x[0]), int(x[1])])
 	
 	user_pos = {}
 	for x in train_data_list:
@@ -67,7 +83,10 @@ def load_all(dataset, data_path):
 	with open(test_negative, 'r') as fd:
 		line = fd.readline()
 		while line != None and line != '':
-			arr = line.split('\t')
+			if dataset == "movielens":
+				arr = line.split(',')
+			else:
+				arr = line.split('\t')
 			if dataset == "adressa":
 				u = eval(arr[0])[0]
 				i = eval(arr[0])[1]

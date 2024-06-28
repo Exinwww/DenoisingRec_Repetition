@@ -9,6 +9,7 @@ def test_all_users(model, batch_size, item_num, test_data_pos, user_pos, top_k):
     predictedIndices = []
     GroundTruth = []
     for u in test_data_pos:
+        print(u, end='\r')
         batch_num = item_num // batch_size
         batch_user = torch.Tensor([u]*batch_size).long().cuda()
         st, ed = 0, batch_size
