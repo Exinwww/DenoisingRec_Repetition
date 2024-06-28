@@ -5,7 +5,10 @@
 其结果与该论文的结论一致，使用R_CE和T_CE降噪后能有效提升模型精度。
 此外，我们添加了non_RT，用于进行不做降噪处理的推荐器训练。
 
-
+We reproduced the original paper based on the authors' open-source code. 
+Additionally, we applied the GMF and NeuMF models on another dataset, MovieLens-25M, and trained them using no denoising, R_CE denoising, and T_CE denoising methods.
+The results were consistent with the conclusions of the original paper, showing that R_CE and T_CE denoising effectively improved the model accuracy. 
+Furthermore, we added a non_RT method for training the recommender system without any denoising.
 #################################################
 
 Adaptive Denoising Training for Recommendation.
