@@ -78,7 +78,7 @@ parser.add_argument("--out",
 	help="save model or not")
 parser.add_argument("--gpu", 
 	type=str,
-	default="1",
+	default="0",
 	help="gpu card ID")
 args = parser.parse_args()
 

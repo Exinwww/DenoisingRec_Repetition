@@ -34,11 +34,11 @@ parser.add_argument('--num_gradual',
 	help='how many epochs for linear drop rate {5, 10, 15}')
 parser.add_argument("--top_k", 
 	type=list, 
-	default=[50, 100],
+	default=[3, 20],
 	help="compute metrics@top_k")
 parser.add_argument("--gpu", 
 	type=str,
-	default="1",  
+	default="0",  
 	help="gpu card ID")
 args = parser.parse_args()
 

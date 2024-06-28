@@ -8,7 +8,12 @@ def test_all_users(model, batch_size, item_num, test_data_pos, user_pos, top_k):
     
     predictedIndices = []
     GroundTruth = []
+    total_len = len(test_data_pos)
+    counter = 0
     for u in test_data_pos:
+        counter += 1
+        print(f'{counter} / {total_len}', end='\r')
+
         batch_num = item_num // batch_size
         batch_user = torch.Tensor([u]*batch_size).long().cuda()
         st, ed = 0, batch_size
@@ -34,6 +39,7 @@ def test_all_users(model, batch_size, item_num, test_data_pos, user_pos, top_k):
         indices = indices.cpu().numpy().tolist()
         predictedIndices.append(indices)
         GroundTruth.append(test_data_pos[u])
+        
     precision, recall, NDCG, MRR = compute_acc(GroundTruth, predictedIndices, top_k)
     return precision, recall, NDCG, MRR
     
