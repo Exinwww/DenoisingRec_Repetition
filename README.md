@@ -1,16 +1,38 @@
 # DenoisingRec
+## 这是我们在原代码基础上作一定修改的复现代码
 #################################################
 
 我们在原作者的开源代码基础上复现了原论文。
-同时在另一数据集movielens-25M上分别使用GMF和NeuMF模型，使用不降噪、R_CE降噪和T_CE降噪的方式进行训练，
+同时在另一数据集movielens-20M上分别使用GMF和NeuMF模型，使用不降噪、R_CE降噪和T_CE降噪的方式进行训练，
 其结果与该论文的结论一致，使用R_CE和T_CE降噪后能有效提升模型精度。
 此外，我们添加了non_RT，用于进行不做降噪处理的推荐器训练。
 
 We reproduced the original paper based on the authors' open-source code. 
-Additionally, we applied the GMF and NeuMF models on another dataset, MovieLens-25M, and trained them using no denoising, R_CE denoising, and T_CE denoising methods.
+Additionally, we applied the GMF and NeuMF models on another dataset, MovieLens-20M, and trained them using no denoising, R_CE denoising, and T_CE denoising methods.
 The results were consistent with the conclusions of the original paper, showing that R_CE and T_CE denoising effectively improved the model accuracy. 
 Furthermore, we added a non_RT method for training the recommender system without any denoising.
 
+###################################################
+
+！！值得注意的是！！
+在使用我们提供的数据集movielens-20M作实验时，应先合并以下文件：
+" data\movielens\movielens_train\movielens.train.rating.part* "
+为 
+" data\movielens\movielens.train.rating"
+
+参考方式：
+copy /b data\movielens\movielens_train\movielens.train.rating.part* data\movielens\merged.movielens.train.rating
+或者使用python脚本等其他方式
+
+
+When conducting experiments using our provided dataset, movielens-20M, you should first merge the following files:
+" data\movielens\movielens_train\movielens.train.rating.part* "
+into 
+" data\movielens\movielens.train.rating "
+
+Reference method:
+" copy /b data\movielens\movielens_train\movielens.train.rating.part* data\movielens\merged.movielens.train.rating "
+or use a Python script or other methods.
 #################################################
 
 Adaptive Denoising Training for Recommendation.
