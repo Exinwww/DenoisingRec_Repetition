@@ -10,7 +10,7 @@
 We reproduced the original paper based on the authors' open-source code. 
 Additionally, we applied the GMF and NeuMF models on another dataset, MovieLens-20M, and trained them using no denoising, R_CE denoising, and T_CE denoising methods.
 The results were consistent with the conclusions of the original paper, showing that R_CE and T_CE denoising effectively improved the model accuracy. 
-Furthermore, we added a non_RT method for training the recommender system without any denoising.
+Furthermore, we added a CE method for training the recommender system without any denoising.
 
 ###################################################
 
