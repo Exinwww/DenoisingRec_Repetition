@@ -5,7 +5,7 @@
 我们在原作者的开源代码基础上复现了原论文。
 同时在另一数据集movielens-20M上分别使用GMF和NeuMF模型，使用不降噪、R_CE降噪和T_CE降噪的方式进行训练，
 其结果与该论文的结论一致，使用R_CE和T_CE降噪后能有效提升模型精度。
-此外，我们添加了non_RT，用于进行不做降噪处理的推荐器训练。
+此外，我们添加了CE，用于进行不做降噪处理的推荐器训练，与R_CE或T_CE的运行方式一致。
 
 We reproduced the original paper based on the authors' open-source code. 
 Additionally, we applied the GMF and NeuMF models on another dataset, MovieLens-20M, and trained them using no denoising, R_CE denoising, and T_CE denoising methods.
